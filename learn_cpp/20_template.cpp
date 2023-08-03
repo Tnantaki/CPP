@@ -9,9 +9,13 @@ char	max(char a, char b) {return ((a > b) ? a : b);}
 template <typename T, typename U>
 auto	Max(T a, U b) {return ((a > b) ? a : b);}
 
+template <typename T>
+void	print(T a) {std::cout << a << std::endl;}
+
 int	main(void)
 {
-	std::cout << Max(20.5, 20) << std::endl;
+	// std::cout << Max(20.5, 20) << std::endl;
+	print("Hello");
 	return (0);
 }
 

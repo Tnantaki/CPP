@@ -1,5 +1,5 @@
 ### Executablem###
-NAME	= account
+NAME	= zombie
 
 ### Compilation ###
 CC		= c++
@@ -7,7 +7,7 @@ RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 ### Source Files ###
-SRCS	= tests.cpp Account.cpp
+SRCS	= main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
 
 ### Object Files ###
 OBJS	= $(SRCS:.cpp=.o)

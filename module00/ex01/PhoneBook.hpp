@@ -1,9 +1,8 @@
 #ifndef PHONEBOOK_CLASS_H
 # define PHONEBOOK_CLASS_H
 
-#include <iostream>
-#include <string>
 #include <sstream>
+#include <iomanip>
 #include "Contact.hpp"
 
 class PhoneBook
