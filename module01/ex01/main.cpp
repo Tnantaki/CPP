@@ -1,12 +1,15 @@
 #include "Zombie.hpp"
 
+#define	N 5
+
 int	main(void)
 {
-	// std::cout << "Alloated on the heap." << std::endl;
-	// Zombie	*zom1 = newZombie("Mos");
-	// (*zom1).announce();
-	// delete zom1;
-
-	// std::cout << "Alloated on the stack." << std::endl;
-	// randomChump("Prach");
+	Zombie	*zoms = zombieHorde(N, "Mos");
+	for (int i = 0; i < N; i++)
+	{
+		std::cout << "Zom[" << i + 1 << "]: ";
+		zoms[i].announce();
+	}
+	delete [] zoms;
+	return (0);
 }

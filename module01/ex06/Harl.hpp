@@ -1,0 +1,23 @@
+#ifndef FILEREPALCE_HPP
+# define FILEREPALCE_HPP
+
+#include <iostream>
+#include <string>
+
+class Harl
+{
+private:
+	std::string	_level[4];
+	void	(Harl::*_fp[4])(void);
+	void	_debug(void);
+	void	_info(void);
+	void	_warning(void);
+	void	_error(void);
+public:
+	Harl(void);
+	~Harl();
+	void	complainFilter(std::string level);
+};
+
+
+#endif

@@ -1,0 +1,6 @@
+a.out
+filestream.cpp
+infile
+numbers
+outfile
+test.out

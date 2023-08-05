@@ -1,0 +1,32 @@
+### Executablem###
+NAME	= program
+
+### Compilation ###
+CC		= c++
+RM		= rm -f
+CFLAGS	= -Wall -Wextra -Werror -std=c++98
+
+### Source Files ###
+SRCS	= main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+
+### Object Files ###
+OBJS	= $(SRCS:.cpp=.o)
+
+### Compilation Rule ###
+%.o:%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
+clean:
+	$(RM) $(OBJS)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re : fclean all
+
+.PHONY: all clean fclean re

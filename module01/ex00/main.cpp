@@ -7,6 +7,8 @@ int	main(void)
 	(*zom1).announce();
 	delete zom1;
 
+	std::cout << "----------------------" << std::endl;
 	std::cout << "Alloated on the stack." << std::endl;
 	randomChump("Prach");
+	return (0);
 }
