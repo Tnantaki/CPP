@@ -13,7 +13,7 @@ SRCS	= megaphone.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 ### Compilation Rule ###
-%.o:%.c
+%.o:%.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
