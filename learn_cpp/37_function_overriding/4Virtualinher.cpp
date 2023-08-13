@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+//Diamond inheritance pattern
+
 using namespace std;
 
 class A

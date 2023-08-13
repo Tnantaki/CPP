@@ -20,5 +20,9 @@ int	main(void)
 	Dog	dog2;
 
 	dog1 = dog2;
+	Dog	basic;
+	{
+		Dog	tmp = basic;
+	}
 	return 0;
 }
