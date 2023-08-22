@@ -14,8 +14,9 @@
 
 bool	readFile(std::string name, std::string &str)
 {
-	char			ch;
 	std::ifstream	inFile;
+	char*			buffer;
+	int				length;
 
 	inFile.open(name);
 	if (!inFile.is_open())
@@ -23,8 +24,13 @@ bool	readFile(std::string name, std::string &str)
 		std::cerr << name << " :Can not open." << std::endl;
 		return (false);
 	}
-	while (inFile.get(ch))
-		str.push_back(ch);
+	inFile.seekg(0, inFile.end);
+	length = inFile.tellg();
+	inFile.seekg(0, inFile.beg);
+	buffer = new char [length];
+	inFile.read(buffer, length);
+	str = buffer;
+	delete [] buffer;
 	inFile.close();
 	return (true);
 }
@@ -47,15 +53,17 @@ bool	writeFile(std::string name, std::string str)
 void	replace_str(std::string &str, std::string s1, std::string s2)
 {
 	size_t	found_pos = 0;
+	int		index = 0;
 
 	if (s1.empty() || s2.empty())
 		return ;
 	while (true)
 	{
-		found_pos = str.find(s1);
+		found_pos = str.find(s1, index);
 		if (found_pos > str.size())
 			break ;
 		str.erase(found_pos, s1.length());
 		str.insert(found_pos, s2);
+		index = found_pos + s2.length();
 	}
 }

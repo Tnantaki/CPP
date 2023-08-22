@@ -19,7 +19,11 @@
 class Contact
 {
 private:
-	std::string	data[5];
+	std::string	_firstname;
+	std::string	_lastname;
+	std::string	_nickname;
+	std::string	_phonenumber;
+	std::string	_darkestsecret;
 public:
 	void		set_cont(std::string data, int i);
 	std::string	get_cont(int i);

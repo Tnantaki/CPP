@@ -47,6 +47,7 @@ void	PhoneBook::add_cont(void)
 	if (!this->_check_emptyfield(buffer))
 		return ;
 	this->_save_cont(buffer);
+	std::cout << "Add new contact success" << std::endl;
 }
 
 void	PhoneBook::search_cont(void)
@@ -58,7 +59,7 @@ void	PhoneBook::search_cont(void)
 	std::cout << "Enter Index > ";
 	getline(std::cin, input);
 	std::istringstream	iss(input);
-	if (iss >> index || iss.eof())
+	if (iss >> index && iss.eof())
 	{
 		if (index >= 0 && index < this->_cont_list)
 		{
