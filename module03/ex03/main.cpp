@@ -22,5 +22,9 @@ int	main(void)
 	diamond.guardGate();
 	diamond.highFivesGuys();
 	diamond.whoAmI();
+	// std::cout << "CT: " << sizeof(ClapTrap) << std::endl;
+	// std::cout << "FT: " << sizeof(FragTrap) << std::endl;
+	// std::cout << "ST: " << sizeof(ScavTrap) << std::endl;
+	// std::cout << "DT: " << sizeof(DiamondTrap) << std::endl;
 	return 0;
 }

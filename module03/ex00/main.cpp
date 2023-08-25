@@ -22,12 +22,8 @@ int	main(void)
 	ct1.attack("Blue Dragon");
 	ct1.attack("White Dragon");
 	ct1.takeDamage(8);
-	ct1.beRepaired(1);
-	ct1.beRepaired(1);
-	ct1.beRepaired(1);
-	ct1.beRepaired(1);
-	ct1.beRepaired(1);
-	ct1.beRepaired(1);
+	for (int i = 0; i < 6; i++)
+		ct1.beRepaired(1);
 	ct1.takeDamage(10);
 	ct1.attack("White Dragon");
 
