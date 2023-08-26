@@ -49,3 +49,8 @@ void	Animal::makeSound() const
 {
 	std::cout << "Animal Sound!" << std::endl;
 }
+
+void	Animal::dpAdrBrain() const
+{
+	std::cout << "Animal don't have brain attribute" << std::endl;
+}

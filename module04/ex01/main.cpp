@@ -20,21 +20,26 @@ int	main(void)
 
 	delete	j;
 	delete	i;
+	// std::cout << "---------------------------" << std::endl;
+	// Animal*	animals[] = {new Dog(), new Cat()};
 
-	std::cout << "---------------------------" << std::endl;
-	Animal*	animals[] = {new Dog(), new Cat()};
+	// for (int i = 0; i < 2; i++)
+	// 	delete animals[i];
+	// std::cout << "---------------------------" << std::endl;
+	// Dog	dog1;
+	// Dog	dog2;
 
-	for (int i = 0; i < 2; i++)
-		delete animals[i];
+	// dog1 = dog2;
+	// Dog	basic;
+	// {
+	// 	Dog	tmp = basic;
+	// }
+	// std::cout << "---------------------------" << std::endl;
+	// Dog	dog1;
+	// Dog	dog2;
 
-	std::cout << "---------------------------" << std::endl;
-	Dog	dog1;
-	Dog	dog2;
-
-	dog1 = dog2;
-	Dog	basic;
-	{
-		Dog	tmp = basic;
-	}
+	// dog1 = dog2;
+	// dog1.dpAdrBrain();
+	// dog2.dpAdrBrain();
 	return 0;
 }

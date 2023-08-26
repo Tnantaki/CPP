@@ -49,3 +49,8 @@ void	Cat::makeSound() const
 {
 	std::cout << "Meaw Meaw!" << std::endl;
 }
+
+void	Cat::dpAdrBrain() const
+{
+	std::cout << "Adress: " << this->_brain << std::endl;
+}

@@ -26,6 +26,7 @@ public:
 	~Dog();
 
 	void	makeSound() const;
+	void	dpAdrBrain() const;
 };
 
 #endif

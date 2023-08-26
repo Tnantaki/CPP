@@ -26,6 +26,7 @@ public:
 	~Cat();
 
 	void	makeSound() const;
+	void	dpAdrBrain() const;
 };
 
 #endif

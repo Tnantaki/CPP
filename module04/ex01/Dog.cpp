@@ -49,3 +49,8 @@ void	Dog::makeSound() const
 {
 	std::cout << "Hong Hong!" << std::endl;
 }
+
+void	Dog::dpAdrBrain() const
+{
+	std::cout << "Adress: " << this->_brain << std::endl;
+}
