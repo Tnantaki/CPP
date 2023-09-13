@@ -18,7 +18,7 @@ bool	readFile(std::string name, std::string &str)
 	char*			buffer;
 	int				length;
 
-	inFile.open(name);
+	inFile.open(name.c_str());
 	if (!inFile.is_open())
 	{
 		std::cerr << name << " :Can not open." << std::endl;
@@ -40,7 +40,7 @@ bool	writeFile(std::string name, std::string str)
 	std::ofstream	outFile;
 
 	name += ".replace";
-	outFile.open(name);
+	outFile.open(name.c_str());
 	if (!outFile.is_open())
 	{
 		std::cerr << name << " :Can not open." << std::endl;
