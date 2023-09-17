@@ -30,6 +30,12 @@
 # define WHITE	"\e[0;37m"
 # define RESET	"\e[0m"
 
+// In object-oriented programming, a "static class" typically refers to a class that cannot be instantiated
+// , meaning you cannot create objects (instances) of that class. Instead, you access its methods
+//  and properties directly using the class name itself, without needing to create an instance of the class.
+//  Static classes are often used to contain utility methods or constants that do not require maintaining state
+//   across multiple instances.
+
 enum e_type
 {
 	e_float, e_double

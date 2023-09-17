@@ -1,37 +1,39 @@
 #include <iostream>
+#include <stdint.h>
+#include <limits>
 
-class MyClass {
-public:
-    int data;
 
-    MyClass() : data(0) {
-        std::cout << "Default constructor called." << std::endl;
-    }
+int main()
+{
+	std::cout << std::numeric_limits<float>::max() << std::endl;
+	std::cout << std::numeric_limits<float>::lowest() << std::endl;
+	std::cout << -std::numeric_limits<float>::max() << std::endl;
+	// std::string str = "1234.0f";
+		// double b = ;
+	// if ((float)(int)b == b)
+	// 	std::cout << "equal" << std::endl;
+	// else
+	// 	std::cout << "Not equal" << std::endl;
+	// std::cout << b << std::endl; 
+	// long unsigned int a = 20;
+	// uintptr_t	str = &a;
 
-    MyClass(int val) : data(val) {
-        std::cout << "Parametrized constructor called with value " << val << "." << std::endl;
-    }
-};
 
-int main() {
-    // Define an array of lambda functions
-    MyClass constructors[] = {
-        []() { return MyClass(); },             // Default constructor
-        [](int val) { return MyClass(val); }    // Parametrized constructor
-    };
+	// char* endptr;
 
-    // Create objects using the lambda functions
-    MyClass obj1 = constructors[0]();
-    MyClass obj2 = constructors[1](42);
+	// std::cout << str.find_last_of(".", 6) << std::endl;
+	// std::cout << std::string::npos << std::endl;
+	// std::cout << &str.at(0) + 1 << std::endl;
+	// std::cout << strtold(str, &endptr) << std::endl;
+	// std::cout << "endptr: " << static_cast<int>(*endptr) << std::endl;
+	// float	a = -100.12f;
+	// float	b = 1.123456;
+	// double	c = 1.123456;
+	// double	d = 1.123456f;
+	// std::cout << a << std::endl;
+	// std::cout << b << std::endl;
+	// std::cout << c << std::endl;
+	// std::cout << d << std::endl;
 
-    std::cout << "obj1.data: " << obj1.data << std::endl;
-    std::cout << "obj2.data: " << obj2.data << std::endl;
-
-    return 0;
+	return 0;
 }
-In this updated example, we use lambda functions to simulate the behavior of constructor pointers. The lambda functions create instances of MyClass using the desired constructor, and you can use the array constructors to create objects with different constructors.
-
-
-
-
-
