@@ -20,23 +20,26 @@ void	print(T& value)
 }
 
 template<typename T>
-void	increate(T& value)
+void	increateNum(T& value)
 {
 	value += 1;
 }
 
 int	main()
 {
-	// char	arrChar[] = {'a', 'b', 'c', 'd'};
+	char	arrChar[] = {'a', 'b', 'c', 'd'};
 	int		arrInt[] = {10, 20, 30, 40};
-	// float	arrFloat[] = {1.11f, 2.22f, 3.33f, 4.44f};
+	float	arrFloat[] = {1.11f, 2.22f, 3.33f, 4.44f};
 
-	// size_t const	amountChar = (sizeof(arrChar) / sizeof(char));
+	size_t const	amountChar = (sizeof(arrChar) / sizeof(char));
 	size_t const	amountInt = (sizeof(arrInt) / sizeof(int));
-	// size_t const	amountFloat = (sizeof(arrFloat) / sizeof(float));
-	std::cout << amountInt << std::endl;
+	size_t const	amountFloat = (sizeof(arrFloat) / sizeof(float));
 
-	// iter(arrChar, 4)
-
+	iter(arrInt, amountInt, &increateNum);
+	iter(arrInt, amountInt, &print);
+	iter(arrChar, amountChar, &increateNum);
+	iter(arrChar, amountChar, &print);
+	iter(arrFloat, amountFloat, &increateNum);
+	iter(arrFloat, amountFloat, &print);
 	return 0;
 }

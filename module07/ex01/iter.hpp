@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tnantaki <tnantaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 13:36:07 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/17 13:36:07 by marvin           ###   ########.fr       */
+/*   Created: 2023/09/21 07:16:16 by tnantaki          #+#    #+#             */
+/*   Updated: 2023/09/21 07:16:16 by tnantaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 template<typename T>
 void	iter(T* array, size_t length, void	(*func)(T&))
 {
-	for (int i = 0; i < length; i++)
-		func(*array);
+	for (size_t i = 0; i < length; i++)
+		func(array[i]);
 }
 
 #endif

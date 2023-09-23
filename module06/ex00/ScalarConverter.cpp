@@ -78,7 +78,7 @@ static void	convertFloat(long double num, char* endptr, std::string str)
 	else if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
 	&& num >= -std::numeric_limits<float>::max() && num <= std::numeric_limits<float>::max())
 	{
-		std::ostringstream	oss;
+		std::ostringstream	oss; // Use stringstream to convert float to string, Cause can't use to_string()
 		oss << num;
 		std::string	numStr = oss.str();
 		if (numStr.find(".") == std::string::npos) // Check if number don't have decimal point.
