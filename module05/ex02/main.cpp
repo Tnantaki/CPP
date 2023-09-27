@@ -20,7 +20,7 @@ void	testShrub()
 	try
 	{
 		ShrubberyCreationForm	form("Nano");
-		Bureaucrat	obj("Boji", 135);
+		Bureaucrat	obj("Boji", 137);
 
 		std::cout << form << std::endl;
 		std::cout << obj << std::endl;

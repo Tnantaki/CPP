@@ -30,8 +30,6 @@ public:
 	Intern&	operator=(Intern const& rhs);
 	~Intern();
 
-	void	prtCheck();
-
 	AForm*	makeForm(std::string const formName, std::string const targetName) const;
 };
 

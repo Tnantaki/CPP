@@ -40,6 +40,5 @@ int	main(void)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
-
 	return (0);
 }

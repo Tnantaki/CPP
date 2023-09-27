@@ -45,6 +45,7 @@ void	testForm()
 int	main(void)
 {
 	// testForm();
+	std::cout << std::endl;
 	try
 	{
 		Form		form("Warrior", 30, 20);

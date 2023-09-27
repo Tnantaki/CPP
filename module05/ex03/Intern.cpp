@@ -20,8 +20,11 @@ Intern::Intern()
 	// std::cout << YELLOW << "[Intern] Parametric Constructor Called" << RESET << std::endl;
 }
 
-Intern::Intern(Intern const& other) : _formName(other._formName)
+Intern::Intern(Intern const& other)
 {
+	this->_formName[0] = other._formName[0];
+	this->_formName[1] = other._formName[1];
+	this->_formName[2] = other._formName[2];
 	// std::cout << YELLOW << "[Intern] Copy Constructor Called" << RESET << std::endl;
 }
 

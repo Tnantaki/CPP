@@ -73,7 +73,7 @@ void	Bureaucrat::decreaseGrade()
 
 void	Bureaucrat::signForm(Form& form)
 {
-	try
+	try // Use try & catch in scope to be able to print reason message
 	{
 		form.beSigned(*this);
 		std::cout << GREEN << this->_name << " signed " << form.getName() << RESET << std::endl;
