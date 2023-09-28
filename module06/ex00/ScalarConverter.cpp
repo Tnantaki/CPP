@@ -12,6 +12,61 @@
 
 #include "ScalarConverter.hpp"
 
+// ********************************************************** //
+// ----------------- Special Member Functions --------------- //
+// ********************************************************** //
+
+ScalarConverter::ScalarConverter()
+{
+	// std::cout << YELLOW << "[ScalarConverter] Default Constructor Called" << RESET << std::endl;
+}
+
+ScalarConverter::ScalarConverter(ScalarConverter const& other)
+{
+	static_cast<void>(other);
+	// std::cout << YELLOW << "[ScalarConverter] Copy Constructor Called" << RESET << std::endl;
+}
+
+ScalarConverter&	ScalarConverter::operator=(ScalarConverter const& rhs)
+{
+	static_cast<void>(rhs);
+	// std::cout << YELLOW << "[ScalarConverter] Copy Assignment Operator Called" << RESET << std::endl;
+	return (*this);
+}
+
+ScalarConverter::~ScalarConverter()
+{
+	// std::cout << YELLOW << "[ScalarConverter] Destructor Called" << RESET << std::endl;
+}
+
+// ********************************************************** //
+// ----------------- Static Member Functions ---------------- //
+// ********************************************************** //
+
+static void	dbOverFlow();
+static bool	scienceNotation(std::string str, int type);
+static void	convertChar(long double num, char* endptr, std::string str);
+static void	convertInt(long double num, char* endptr, std::string str);
+static void	convertFloat(long double num, char* endptr, std::string str);
+static void	convertDouble(long double num, char* endptr, std::string str);
+
+// I use to_string function to convert double -> string
+// And count Length I will get 316. It allow on c++11.
+void	ScalarConverter::convert(const char* str)
+{
+	char*		endptr;
+	long double	num;
+
+	num = strtold(str, &endptr);
+	if (strlen(str) > 316 && (num > std::numeric_limits<double>::max()
+	|| num < -std::numeric_limits<double>::max())) // Overflow Double Type
+		return dbOverFlow();
+	convertChar(num, endptr, std::string(str));
+	convertInt(num, endptr, std::string(str));
+	convertFloat(num, endptr, std::string(str));
+	convertDouble(num, endptr, std::string(str));
+}
+
 static void	dbOverFlow()
 {
 	std::cout << "char: " << "impossible" << std::endl;
@@ -108,25 +163,4 @@ static void	convertDouble(long double num, char* endptr, std::string str)
 	}
 	else
 		std::cout << "double: " << "impossible" << std::endl;
-}
-
-// ********************************************************** //
-// ----------------- Static Member Functions ---------------- //
-// ********************************************************** //
-
-// I use to_string function to convert double -> string
-// And count Length I will get 316. It allow on c++11.
-void	ScalarConverter::convert(const char* str)
-{
-	char*		endptr;
-	long double	num;
-
-	num = strtold(str, &endptr);
-	if (strlen(str) > 316 && (num > std::numeric_limits<double>::max()
-	|| num < -std::numeric_limits<double>::max())) // Overflow Double Type
-		return dbOverFlow();
-	convertChar(num, endptr, std::string(str));
-	convertInt(num, endptr, std::string(str));
-	convertFloat(num, endptr, std::string(str));
-	convertDouble(num, endptr, std::string(str));
 }

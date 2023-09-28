@@ -47,17 +47,17 @@ void	identify(Base* p)
 void	identify(Base& p)
 {
 	try {
-		dynamic_cast<A&>(p);
+		(void)dynamic_cast<A&>(p);
 		std::cout << "p point to type: " << "A" << std::endl;
 		return ;
 	} catch (std::exception & e) {}
 	try {
-		dynamic_cast<B&>(p);
+		(void)dynamic_cast<B&>(p);
 		std::cout << "p point to type: " << "B" << std::endl;
 		return ;
 	} catch (std::exception & e) {}
 	try {
-		dynamic_cast<C&>(p);
+		(void)dynamic_cast<C&>(p);
 		std::cout << "p point to type: " << "C" << std::endl;
 		return ;
 	} catch (std::exception & e) {}

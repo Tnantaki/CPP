@@ -7,7 +7,7 @@ RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 ### Source Files ###
-SRCS	= main.cpp Base.cpp
+SRCS	= main.cpp
 
 ### Object Files ###
 OBJS	= $(SRCS:.cpp=.o)

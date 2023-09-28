@@ -14,7 +14,7 @@
 # define SERIALIZER_HPP
 
 #include <iostream>
-#include <stdint.h>
+#include <stdint.h> // datatype : uintptr_t
 
 #include "Data.hpp"
 
@@ -30,9 +30,14 @@
 
 class Serializer
 {
-public:
-	static uintptr_t	serialize(Data* ptr);
-	static Data*		deserialize(uintptr_t raw);
+	public:
+		Serializer();
+		Serializer(Serializer const& other);
+		Serializer&	operator=(Serializer const& rhs);
+		~Serializer();
+
+		static uintptr_t	serialize(Data* ptr);
+		static Data*		deserialize(uintptr_t raw);
 };
 
 #endif

@@ -43,8 +43,13 @@ enum e_type
 
 class ScalarConverter
 {
-public:
-	static void	convert(const char* str);
+	public:
+		ScalarConverter();
+		ScalarConverter(ScalarConverter const& other);
+		ScalarConverter&	operator=(ScalarConverter const& rhs);
+		~ScalarConverter();
+
+		static void	convert(const char* str);
 };
 
 #endif
