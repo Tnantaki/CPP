@@ -108,7 +108,7 @@ static bool	scienceNotation(std::string str, int type)
 static void	convertChar(long double num, char* endptr, std::string str)
 {
 	if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
-	&& num > 32 && num < 126)
+	&& num >= 32 && num <= 126)
 		std::cout << "char: '" << static_cast<char>(num) << "'" << std::endl;
 	else if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
 	&& num >= std::numeric_limits<char>::min() && num <= std::numeric_limits<char>::max())
