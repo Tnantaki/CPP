@@ -45,21 +45,19 @@ ScalarConverter::~ScalarConverter()
 
 static void	dbOverFlow();
 static bool	scienceNotation(std::string str, int type);
-static void	convertChar(long double num, char* endptr, std::string str);
-static void	convertInt(long double num, char* endptr, std::string str);
-static void	convertFloat(long double num, char* endptr, std::string str);
-static void	convertDouble(long double num, char* endptr, std::string str);
+static void	convertChar(double num, char* endptr, std::string str);
+static void	convertInt(double num, char* endptr, std::string str);
+static void	convertFloat(double num, char* endptr, std::string str);
+static void	convertDouble(double num, char* endptr, std::string str);
 
-// I use to_string function to convert double -> string
-// And count Length I will get 316. It allow on c++11.
 void	ScalarConverter::convert(const char* str)
 {
-	char*		endptr;
-	long double	num;
+	char*	endptr;
+	double	num;
 
-	num = strtold(str, &endptr);
-	if (strlen(str) > 316 && (num > std::numeric_limits<double>::max()
-	|| num < -std::numeric_limits<double>::max())) // Overflow Double Type
+	num = strtod(str, &endptr);
+	if (num >= std::numeric_limits<double>::infinity()
+	|| num <= -std::numeric_limits<double>::infinity()) // Overflow Double Type
 		return dbOverFlow();
 	convertChar(num, endptr, std::string(str));
 	convertInt(num, endptr, std::string(str));
@@ -105,7 +103,7 @@ static bool	scienceNotation(std::string str, int type)
 }
 
 // Displayable Char is ASCII number 32 - 126
-static void	convertChar(long double num, char* endptr, std::string str)
+static void	convertChar(double num, char* endptr, std::string str)
 {
 	if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
 	&& num >= 32 && num <= 126)
@@ -117,7 +115,7 @@ static void	convertChar(long double num, char* endptr, std::string str)
 		std::cout << "char: " << "impossible" << std::endl;
 }
 
-static void	convertInt(long double num, char* endptr, std::string str)
+static void	convertInt(double num, char* endptr, std::string str)
 {
 	if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
 	&& num >= std::numeric_limits<int>::min() && num <= std::numeric_limits<int>::max())
@@ -126,7 +124,7 @@ static void	convertInt(long double num, char* endptr, std::string str)
 		std::cout << "int: " << "impossible" << std::endl;
 }
 
-static void	convertFloat(long double num, char* endptr, std::string str)
+static void	convertFloat(double num, char* endptr, std::string str)
 {
 	if (scienceNotation(str, e_float))
 		return ;
@@ -145,20 +143,20 @@ static void	convertFloat(long double num, char* endptr, std::string str)
 		std::cout << "float: " << "impossible" << std::endl;
 }
 
-static void	convertDouble(long double num, char* endptr, std::string str)
+static void	convertDouble(double num, char* endptr, std::string str)
 {
 	if (scienceNotation(str, e_double))
 		return ;
 	else if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
-	&& num >= -std::numeric_limits<double>::max() && num <= std::numeric_limits<double>::max())
+	&& num >= -std::numeric_limits<double>::infinity() && num <= std::numeric_limits<double>::infinity())
 	{
 		std::ostringstream	oss;
 		oss << num;
 		std::string	numStr = oss.str();
 		if (numStr.find(".") == std::string::npos)
-			std::cout << "double: " << static_cast<double>(num) << ".0" << std::endl;
+			std::cout << "double: " << num << ".0" << std::endl;
 		else
-			std::cout << "double: " << static_cast<double>(num) << std::endl;
+			std::cout << "double: " << num << std::endl;
 
 	}
 	else
