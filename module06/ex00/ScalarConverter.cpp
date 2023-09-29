@@ -43,7 +43,6 @@ ScalarConverter::~ScalarConverter()
 // ----------------- Static Member Functions ---------------- //
 // ********************************************************** //
 
-static void	dbOverFlow();
 static bool	scienceNotation(std::string str, int type);
 static void	convertChar(double num, char* endptr, std::string str);
 static void	convertInt(double num, char* endptr, std::string str);
@@ -56,21 +55,10 @@ void	ScalarConverter::convert(const char* str)
 	double	num;
 
 	num = strtod(str, &endptr);
-	if (num >= std::numeric_limits<double>::infinity()
-	|| num <= -std::numeric_limits<double>::infinity()) // Overflow Double Type
-		return dbOverFlow();
 	convertChar(num, endptr, std::string(str));
 	convertInt(num, endptr, std::string(str));
 	convertFloat(num, endptr, std::string(str));
 	convertDouble(num, endptr, std::string(str));
-}
-
-static void	dbOverFlow()
-{
-	std::cout << "char: " << "impossible" << std::endl;
-	std::cout << "int: " << "impossible" << std::endl;
-	std::cout << "float: " << "impossible" << std::endl;
-	std::cout << "double: " << "impossible" << std::endl;
 }
 
 static bool	scienceNotation(std::string str, int type)
@@ -105,11 +93,11 @@ static bool	scienceNotation(std::string str, int type)
 // Displayable Char is ASCII number 32 - 126
 static void	convertChar(double num, char* endptr, std::string str)
 {
-	if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
-	&& num >= 32 && num <= 126)
+	if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))\
+		&& num >= 32 && num <= 126)
 		std::cout << "char: '" << static_cast<char>(num) << "'" << std::endl;
-	else if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
-	&& num >= std::numeric_limits<char>::min() && num <= std::numeric_limits<char>::max())
+	else if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))\
+		&& num >= std::numeric_limits<char>::min() && num <= std::numeric_limits<char>::max())
 		std::cout << "char: " << "Non displayable" << std::endl;
 	else
 		std::cout << "char: " << "impossible" << std::endl;
@@ -117,8 +105,8 @@ static void	convertChar(double num, char* endptr, std::string str)
 
 static void	convertInt(double num, char* endptr, std::string str)
 {
-	if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
-	&& num >= std::numeric_limits<int>::min() && num <= std::numeric_limits<int>::max())
+	if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))\
+		&& num >= std::numeric_limits<int>::min() && num <= std::numeric_limits<int>::max())
 		std::cout << "int: " << static_cast<int>(num) << std::endl;
 	else
 		std::cout << "int: " << "impossible" << std::endl;
@@ -128,8 +116,8 @@ static void	convertFloat(double num, char* endptr, std::string str)
 {
 	if (scienceNotation(str, e_float))
 		return ;
-	else if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
-	&& num >= -std::numeric_limits<float>::max() && num <= std::numeric_limits<float>::max())
+	else if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))\
+			&& num >= -std::numeric_limits<float>::max() && num <= std::numeric_limits<float>::max())
 	{
 		std::ostringstream	oss; // Use stringstream to convert float to string, Cause can't use to_string()
 		oss << num;
@@ -147,8 +135,8 @@ static void	convertDouble(double num, char* endptr, std::string str)
 {
 	if (scienceNotation(str, e_double))
 		return ;
-	else if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))
-	&& num >= -std::numeric_limits<double>::infinity() && num <= std::numeric_limits<double>::infinity())
+	else if ((*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0' && str.find_last_of(".", endptr - &str.at(0)) != std::string::npos))\
+			&& num >= -std::numeric_limits<double>::max() && num <= std::numeric_limits<double>::max())
 	{
 		std::ostringstream	oss;
 		oss << num;

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <limits>
-#include <float.h>
+// #include <float.h>
 
 void	prtBinary(int num)
 {
@@ -36,8 +36,8 @@ int	main(void)
 	// std::cout << std::numeric_limits<float>::max() << std::endl;
 	// if ( < std::numeric_limits<float>::min())
 	// 	std::cout << "I'm right" << std::endl;
-	float a = -3.40283e+38;
-	std::cout << a << std::endl;
+	// float a = 20.f;
+	// std::cout << a << std::endl;
 
 	// float b = FLT_MAX;
 	// std::cout << std::numeric_limits<float>::lowest() << std::endl;
@@ -50,7 +50,30 @@ int	main(void)
 	// 	std::cout << "you are correct " << std::endl;
 	// if (b > (b + 0.00005))
 	// 	std::cout << "you are correct " << std::endl;
+	// char * endptr = NULL;
+	// char const*	str = "-30000.40283e+38";
+	// float a = strtod(str, &endptr);
+	// std::cout << a << std::endl;
+	// std::cout << -std::numeric_limits<float>::max() << std::endl;
+	float a = 3.40283e+38;
+	float b = -3.40283e+38;
+	char	c = static_cast<char>(a);
+	char	d = static_cast<char>(b);
+	std::cout << (int)c << std::endl;
+	std::cout << (int)d << std::endl;
 
-
-
+	// int	*c = reinterpret_cast<int *>(&a);
+	// int	*d = reinterpret_cast<int *>(&b);
+	// std::cout << a << std::endl;
+	// prtBinary(*c);
+	// std::cout << b << std::endl;
+	// prtBinary(*d);
+	// float	a = ;
+	// double	b = inf;
+	// double	g = 2147483648;
+	// std::cout << g << std::endl;
+	// std::cout << INT_MAX << std::endl;
+	// float	z = std::numeric_limits<int>::max()
+	if (a > std::numeric_limits<float>::max())
+		std::cout << "Im right" << std::endl;
 }

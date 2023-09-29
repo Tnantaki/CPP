@@ -30,6 +30,13 @@
 # define WHITE	"\e[0;37m"
 # define RESET	"\e[0m"
 
+# define MAX_INT	2147483647
+# define MIM_INT	-2147483648
+# define MAX_FLOAT	3.402823466E+38
+# define MIM_FLOAT	-3.402823466E+38 // Actually call lowest float
+# define MAX_DOUBLE	1.7976931348623158E+308
+# define MIN_DOUBLE	-1.7976931348623158E+308 // Actually call lowest double
+
 // In object-oriented programming, a "static class" typically refers to a class that cannot be instantiated
 // , meaning you cannot create objects (instances) of that class. Instead, you access its methods
 //  and properties directly using the class name itself, without needing to create an instance of the class.
