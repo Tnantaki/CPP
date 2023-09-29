@@ -35,10 +35,10 @@ int	main()
 	size_t const	amountInt = (sizeof(arrInt) / sizeof(int));
 	size_t const	amountFloat = (sizeof(arrFloat) / sizeof(float));
 
-	iter(arrInt, amountInt, &increateNum);
-	iter(arrInt, amountInt, &print);
 	iter(arrChar, amountChar, &increateNum);
 	iter(arrChar, amountChar, &print);
+	iter(arrInt, amountInt, &increateNum);
+	iter(arrInt, amountInt, &print);
 	iter(arrFloat, amountFloat, &increateNum);
 	iter(arrFloat, amountFloat, &print);
 	return 0;

@@ -18,7 +18,7 @@ Array<T>::Array(Array const& other) : _size(other._size)
 {
 	// std::cout << YELLOW << "[Array] Copy Constructor Called" << RESET << std::endl;
 	this->_array = new T[_size];
-	for (unsigned int i = 0;i < this->_size; i++)
+	for (unsigned int i = 0; i < this->_size; i++)
 		this->_array[i] = other._array[i];
 }
 
@@ -31,7 +31,7 @@ Array<T>&	Array<T>::operator=(Array const& rhs)
 		this->_size = rhs._size;
 		delete [] this->_array;
 		this->_array = new T[this->_size];
-		for (unsigned int i = 0;i < this->_size; i++)
+		for (unsigned int i = 0; i < this->_size; i++)
 			this->_array[i] = rhs._array[i];
 	}
 	return *this;
@@ -51,12 +51,12 @@ Array<T>::~Array()
 template<typename T>
 unsigned int	Array<T>::size() const {return this->_size;}
 
+// we can't change value of attribute but
+// we can change the value that attribute point to in const member function.
 template<typename T>
 T&	Array<T>::operator[](long int index) const
 {
-	if (index < 0)
-		throw OutOfRangeException();
-	if (index >= static_cast<long int>(this->_size))
+	if (index < 0 || index >= static_cast<unsigned int>(this->_size))
 		throw OutOfRangeException();
 	return this->_array[index];
 }
