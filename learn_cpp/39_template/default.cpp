@@ -32,7 +32,5 @@ int	main(void)
 
 	std::cout << var1 << std::endl;
 	std::cout << var2 << std::endl;
-	
-
 	return 0;
 }

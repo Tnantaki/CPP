@@ -10,7 +10,7 @@ void	print(T value)
 	std::cout << value << std::endl;
 }
 
-size will be crete as a complied-time
+// size will be crete as a complied-time
 template<int size>
 class Array
 {
