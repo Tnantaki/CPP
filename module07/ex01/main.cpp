@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "iter.hpp"
+#include <iostream>
 #include <iostream>
 #include "iter.hpp"
 
@@ -35,11 +37,11 @@ int	main()
 	size_t const	amountInt = (sizeof(arrInt) / sizeof(int));
 	size_t const	amountFloat = (sizeof(arrFloat) / sizeof(float));
 
-	iter(arrChar, amountChar, &increateNum);
-	iter(arrChar, amountChar, &print);
-	iter(arrInt, amountInt, &increateNum);
-	iter(arrInt, amountInt, &print);
-	iter(arrFloat, amountFloat, &increateNum);
-	iter(arrFloat, amountFloat, &print);
+	iter(arrChar, amountChar, increateNum<char>);
+	iter(arrChar, amountChar, print<const char>);
+	iter(arrInt, amountInt, increateNum<int>);
+	iter(arrInt, amountInt, print<const int>);
+	iter(arrFloat, amountFloat, increateNum<float>);
+	iter(arrFloat, amountFloat, print<const float>);
 	return 0;
 }
