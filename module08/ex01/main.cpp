@@ -6,7 +6,7 @@
 /*   By: tnantaki <tnantaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 09:13:06 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/26 22:36:28 by tnantaki         ###   ########.fr       */
+/*   Updated: 2023/10/01 10:30:58 by tnantaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	testCanoForm()
 	sp3.displayArr();
 }
 
-void	testMyCase()
+void	testException()
 {
 	try {
 		Span sp = Span(2);
@@ -74,7 +74,20 @@ void	testMyCase()
 	catch (std::exception &e) {
 		std::cerr<< RED << e.what() << RESET << std::endl;
 	}
-	try {
+}
+
+void	testSpan()
+{
+	{
+		Span sp = Span(20);
+		sp.addNumber(std::numeric_limits<int>::max());
+		sp.addNumber(std::numeric_limits<int>::min() + 1);
+		sp.addNumber(std::numeric_limits<int>::min());
+		sp.addNumber(std::numeric_limits<int>::min());
+		std::cout << "shortest span: "<< sp.shortestSpan() << std::endl;
+		std::cout << "longest span: " << sp.longestSpan() << std::endl;
+	}
+	{
 		Span sp = Span(10000);
 		sp.randomAllNumbers();
 		std::cout << "### Test 10000 numbers ###" << std::endl;
@@ -82,15 +95,13 @@ void	testMyCase()
 		std::cout << "shortest span: "<< sp.shortestSpan() << std::endl;
 		std::cout << "longest span: " << sp.longestSpan() << std::endl;
 	}
-	catch (std::exception &e) {
-		std::cerr<< RED << e.what() << RESET << std::endl;
-	}
 }
 
 int	main()
 {
-	testCanoForm();
-	testMyCase();
+	// testCanoForm();
+	// testException();
+	// testSpan();
 	Span sp = Span(5);
 
 	sp.addNumber(6);
