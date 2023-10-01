@@ -13,15 +13,15 @@ Student&	Student::operator=(Student const& rhs)
 	return *this;
 }
 
-int	main(void)
-{
-	Student	A("Mos", 18, 2.50); // create object
-	Student B = Student("Mac", 15, 3.00); // create object
+// int	main(void)
+// {
+// 	Student	A("Mos", 18, 2.50); // create object
+// 	Student B = Student("Mac", 15, 3.00); // create object
 
-	std::cout << A.getName() << ", " << A.getAge() << std::endl;
-	std::cout << B.getName() << ", " << B.getAge() << std::endl;
+// 	std::cout << A.getName() << ", " << A.getAge() << std::endl;
+// 	std::cout << B.getName() << ", " << B.getAge() << std::endl;
 
-	B = A; // Copy Assignment Operator Called cause B was existed
+// 	B = A; // Copy Assignment Operator Called cause B was existed
 
-	std::cout << B.getName() << ", " << B.getAge() << std::endl;
-}
+// 	std::cout << B.getName() << ", " << B.getAge() << std::endl;
+// }
