@@ -1,33 +1,41 @@
-// #include <iostream>
-// #include <stack>
+#include <iostream>
+#include <stack>
+#include <list>
 
-// int main(void)
-// {
-// 	std::stack<int>	first();
-
-
-// }
-// constructing stacks
 #include <iostream>       // std::cout
 #include <stack>          // std::stack
 #include <vector>         // std::vector
 #include <deque>          // std::deque
+#include <typeinfo>
+
+template<typename T>
+void	disStack(std::stack<T> stack)
+{
+	while (!stack.empty())
+	{
+		std::cout << stack.top() << ", ";
+		stack.pop();
+	}
+	std::cout << std::endl;
+}
 
 int main ()
 {
-  std::deque<int> mydeque (3,100);          // deque with 3 elements
-  std::vector<int> myvector (2,200);        // vector with 2 elements
+	std::stack<int>	stack;
+	for (int i = 0; i < 5; i++)
+		stack.push((i + 1) * 10);
+	std::stack<int>	stack2(stack);
+	// for (auto i : list)
+	// 	std::cout << i << std::endl;
+	disStack(stack2);
+	disStack(stack);
+	disStack(stack);
 
-  std::stack<int> first;                    // empty stack
-  std::stack<int> second (mydeque);         // stack initialized to copy of deque
+	// std::cout << typeid(vec).name() << std::endl;
 
-//   std::stack<int,std::vector<int> > third;  // empty stack using vector
-//   std::stack<int,std::vector<int> > fourth (myvector);
-
-//   std::cout << "size of first: " << first.size() << '\n';
-//   std::cout << "size of second: " << second.size() << '\n';
-//   std::cout << "size of third: " << third.size() << '\n';
-//   std::cout << "size of fourth: " << fourth.size() << '\n';
-
-  return 0;
+	// std::stack<int, std::deque<int> >::iterator it = stk
+	// std::cout << *(std::begin(stk)) <<std::endl;
+	// for (int i : stk)
+	// 	std::cout << i << std::endl;
+	return 0;
 }
