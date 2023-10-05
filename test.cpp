@@ -1,41 +1,41 @@
 #include <iostream>
-#include <stack>
-#include <list>
+#include <cstdlib>
 
-#include <iostream>       // std::cout
-#include <stack>          // std::stack
-#include <vector>         // std::vector
-#include <deque>          // std::deque
-#include <typeinfo>
-
-template<typename T>
-void	disStack(std::stack<T> stack)
+template<typename T, typename U>
+void	iter(T* array, size_t length, void	(*func)(U&))
 {
-	while (!stack.empty())
-	{
-		std::cout << stack.top() << ", ";
-		stack.pop();
-	}
-	std::cout << std::endl;
+	for (size_t i = 0; i < length; i++)
+		func(array[i]);
 }
 
-int main ()
+template<typename T>
+void	iter(T* array, size_t length, void	(*func)(T&))
 {
-	std::stack<int>	stack;
-	for (int i = 0; i < 5; i++)
-		stack.push((i + 1) * 10);
-	std::stack<int>	stack2(stack);
-	// for (auto i : list)
-	// 	std::cout << i << std::endl;
-	disStack(stack2);
-	disStack(stack);
-	disStack(stack);
+	for (size_t i = 0; i < length; i++)
+		func(array[i]);
+}
 
-	// std::cout << typeid(vec).name() << std::endl;
+template<typename T>
+void	print(T& value)
+{
+	std::cout << value << std::endl;
+}
 
-	// std::stack<int, std::deque<int> >::iterator it = stk
-	// std::cout << *(std::begin(stk)) <<std::endl;
-	// for (int i : stk)
-	// 	std::cout << i << std::endl;
-	return 0;
+template<typename T>
+void	increateNum(T& value)
+{
+	value += 1;
+}
+
+int	main()
+{
+	const int		arrInt[] = {10, 20, 30, 40};
+	// char	arrChar[] = {'a', 'b', 'c', 'd'};
+	// float	arrFloat[] = {1.11f, 2.22f, 3.33f, 4.44f};
+
+	size_t const	amountInt = (sizeof(arrInt) / sizeof(int));
+	// size_t const	amountChar = (sizeof(arrChar) / sizeof(char));
+	// size_t const	amountFloat = (sizeof(arrFloat) / sizeof(float));
+
+	iter(arrInt, amountInt, print<const int>);
 }
