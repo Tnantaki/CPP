@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 09:13:06 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/05 11:16:39 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/05 16:52:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,24 @@
 
 int	main(int ac, char **av)
 {
-	if (ac != 2)
-		return (std::cerr << RED << "The program take 1 argument." << std::endl, 1);
+	std::stack<int>	stk;
+	std::string		str;
 
-	std::stack<int>		stk;
+	if (ac != 2)
+		return prtErrMsg("The program take 1 argument."), 1;
 	std::istringstream	iss(av[1]);
-	std::string			str;
 	do {
 		iss >> str;
-		str.compare('+')
-		if (isdigit(str))
-	} while (!str.empty());
-	std::cout << str << std::endl;
+		if (isNumbers(str))
+			stk.push(atoi(str.c_str()));
+		else if (isOperator(str))
+			if (!operating(str[0], stk))
+				return 1;
+		else
+			return prtErrMsg("Error : Numbers or Operator was wrong."), 1;
+	} while (!iss.eof());
+	if (stk.size() != 1)
+		return prtErrMsg("Error : Wrong expression."), 1;
+	std::cout << stk.top() << std::endl;
 	return 0;
 }

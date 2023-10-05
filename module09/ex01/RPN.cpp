@@ -1,34 +1,59 @@
-#include "Span.hpp"
+#include "RPN.hpp"
 
-Span::Span(unsigned int N) : _maxSize(N), _index(0)
+void	prtErrMsg(char const* msg)
 {
-	// std::cout << YELLOW << "[Span] Parametric Constructor Called" << RESET << std::endl;
+	std::cerr << RED << msg << RESET << std::endl;
 }
 
-Span::Span(Span const& other) : _maxSize(other._maxSize), _index(other._index)
+bool	isNumbers(std::string str)
 {
-	_arr = other._arr;
-	// std::cout << YELLOW << "[Span] Copy Constructor Called" << RESET << std::endl;
-}
-
-Span&	Span::operator=(Span const& rhs)
-{
-	if (this != &rhs)
+	size_t	i = 0;
+	while (str[i])
 	{
-		_maxSize = rhs._maxSize;
-		_index = rhs._index;
-		_arr = rhs._arr;
-		// std::cout << YELLOW << "[Span] Copy Assignment Operator Called" << RESET << std::endl;
+		if (!isdigit(str[i]))
+			return false;
+		i++;
 	}
-	return *this;
+	if (i == 1)
+		return true;
+	prtErrMsg("Error : Numbers must less than 10.");
+	exit(1);
 }
 
-Span::~Span()
+bool	isOperator(std::string str)
 {
-	// std::cout << YELLOW << "[Span] Destructor Called" << RESET << std::endl;
+	if ((str[0] == '+' || str[0] == '-' || str[0] == '*' || str[0] == '/') && !str[1])
+		return true;
+	else
+		return false;
 }
 
-// ********************************************************** //
-// --------------------- Member Functions ------------------- //
-// ********************************************************** //
+bool	operating(char opr, std::stack<int> &stk)
+{
+	int	nums;
+	int	a;
+	int	b;
 
+	b = stk.top();
+	stk.pop();
+	if (stk.empty())
+		return prtErrMsg("Error : Wrong expression."), false;
+	a = stk.top();
+	stk.pop();
+	std::cout << a << opr << b << "=";
+	if (opr == '+')
+		nums = a + b;
+	else if (opr == '-')
+		nums = a - b;
+	else if (opr == '*')
+		nums = a * b;
+	else if (opr == '/')
+	{
+		if (b == 0)
+			return prtErrMsg("Error : dividing by zero is undefined."), false;
+		nums = a / b;
+	}
+	stk.push(nums);
+	std::cout << stk.top() << std::endl;
+	return true;
+}

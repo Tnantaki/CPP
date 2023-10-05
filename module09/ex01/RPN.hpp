@@ -2,9 +2,9 @@
 # define RPN_HPP
 
 #include <iostream>
-#include <stack>
-#include <algorithm>
-#include <sstream>
+#include <stack> // std::stack
+#include <sstream> // istringstream
+#include <cstdlib> // atoi
 
 # define BLACK	"\e[0;30m"
 # define RED	"\e[0;31m"
@@ -16,16 +16,9 @@
 # define WHITE	"\e[0;37m"
 # define RESET	"\e[0m"
 
-// class Span
-// {
-// 	private:
-// 		Span();
-// 	public:
-// 		Span(unsigned int const N);
-// 		Span(Span const& other);
-// 		Span&	operator=(Span const& rhs);
-// 		~Span();
-
-// };
+void	prtErrMsg(char const* msg);
+bool	isNumbers(std::string str);
+bool	isOperator(std::string str);
+bool	operating(char opr, std::stack<int> &stk);
 
 #endif
