@@ -1,10 +1,13 @@
-#ifndef BITCOINEXCHANGE_HPP
-# define BITCOINEXCHANGE_HPP
+#ifndef PMERGEME_HPP
+# define PMERGEME_HPP
 
 #include <iostream>
-// #include <stack> // std::stack
-// #include <sstream> // istringstream
-// #include <cstdlib> // atoi
+#include <string>
+#include <map>
+#include <fstream>
+#include <stdlib.h> // for atof
+
+#include <iomanip> // for setprecision
 
 # define BLACK	"\e[0;30m"
 # define RED	"\e[0;31m"
@@ -16,5 +19,9 @@
 # define WHITE	"\e[0;37m"
 # define RESET	"\e[0m"
 
+typedef	std::map<std::string, float>	data_base_t;
+
+void	prtData(data_base_t data);
+bool	getDataBase(data_base_t& dataBase);
 
 #endif
