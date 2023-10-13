@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 09:13:06 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/05 16:52:45 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/13 07:58:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ int	main(int ac, char **av)
 		if (isNumbers(str))
 			stk.push(atoi(str.c_str()));
 		else if (isOperator(str))
+		{
 			if (!operating(str[0], stk))
 				return 1;
+		}
 		else
 			return prtErrMsg("Error : Numbers or Operator was wrong."), 1;
 	} while (!iss.eof());
