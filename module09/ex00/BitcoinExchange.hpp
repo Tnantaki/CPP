@@ -1,5 +1,5 @@
-#ifndef PMERGEME_HPP
-# define PMERGEME_HPP
+#ifndef BITCOINEXCHANGE_HPP
+# define BITCOINEXCHANGE_HPP
 
 #include <iostream>
 #include <string>
@@ -37,12 +37,16 @@ class BTC
 {
 	private:
 		date_price_t	_dataBase;
+		std::string		_lowestDate;
 
 		void	_setDataBase(const char* fileName);
 		float	_getPrice(const std::string& date) const;
 	public:
+		// Orthodox Cononical Form
 		BTC();
-
+		BTC(BTC const& other);
+		BTC&	operator=(BTC const& rhs);
+		~BTC();
 
 		// Member Function
 		void	prtDataBase() const;

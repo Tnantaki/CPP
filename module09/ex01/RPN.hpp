@@ -2,9 +2,9 @@
 # define RPN_HPP
 
 #include <iostream>
-#include <stack> // std::stack
-#include <sstream> // istringstream
-#include <cstdlib> // atoi
+#include <stack>	// std::stack
+#include <sstream>	// istringstream
+#include <cstdlib>	// atoi
 
 # define BLACK	"\e[0;30m"
 # define RED	"\e[0;31m"

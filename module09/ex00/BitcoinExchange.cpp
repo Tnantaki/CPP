@@ -1,23 +1,43 @@
 #include "bitcoinExchange.hpp"
 
 // ********************************************************** //
-// ----------------- Special Member Functions --------------- //
+// ----------------- Orthodox Canonical Form ---------------- //
 // ********************************************************** //
 
 BTC::BTC()
 {
 	_setDataBase("data.csv");
-	std::cout << YELLOW << "[BTC] Default Constructor Called" << RESET << std::endl;
+	// std::cout << YELLOW << "[BTC] Default Constructor Called" << RESET << std::endl;
 }
 
+BTC::BTC(BTC const& other) : _dataBase(other._dataBase), _lowestDate(other._lowestDate)
+{
+	// std::cout << YELLOW << "[BTC] Copy Constructor Called" << RESET << std::endl;
+}
+
+BTC&	BTC::operator=(BTC const& rhs)
+{
+	if (this != &rhs)
+	{
+		_dataBase = rhs._dataBase;
+		_lowestDate = rhs._lowestDate;
+		// std::cout << YELLOW << "[BTC] Copy Assignment Operator Called" << RESET << std::endl;
+	}
+	return *this;
+}
+
+BTC::~BTC()
+{
+	// std::cout << YELLOW << "[BTC] Destructor Called" << RESET << std::endl;
+}
 // ********************************************************** //
 // --------------------- Member Functions ------------------- //
 // ********************************************************** //
 
 static bool	validFormat(std::string const& line, date_num_t& input);
-static bool	isdate_str(std::string const& date);
+static bool	isdate_str(std::string date);
 static bool	validNumber(std::string number);
-static bool	validDate(std::string date);
+static bool	validDate(std::string date, std::string const lowestDate);
 
 void	BTC::evaluate(char* fileName) const
 {
@@ -34,7 +54,7 @@ void	BTC::evaluate(char* fileName) const
 		getline(inputFile, line);
 		if (!validFormat(line, input))
 			continue ;
-		if (!validDate(input.date))
+		if (!validDate(input.date, _lowestDate))
 			continue ;
 		if (!validNumber(input.num))
 			continue ;
@@ -47,7 +67,7 @@ void	BTC::evaluate(char* fileName) const
 void	BTC::prtDataBase() const
 {
 	for (date_price_t::const_iterator it = _dataBase.begin(); it != _dataBase.end(); it++)
-		std::cout << it->first << " , " << it->second << std::endl;
+		std::cout << it->first << "," << it->second << std::endl;
 }
 
 // ********************************************************** //
@@ -57,24 +77,27 @@ void	BTC::prtDataBase() const
 void	BTC::_setDataBase(const char* fileName)
 {
 	std::ifstream	csv;
+	std::string		line;
+	std::size_t		pos;
 
 	csv.open(fileName);
 	if (!csv.is_open())
 		throw NoDataBase();
-	char	tmpDate[256];
-	char	tmpPrice[256];
-
-	csv.getline(tmpDate, 256);
+	getline(csv, line);
 	while (!csv.eof()) {
-		csv.getline(tmpDate, 256, ',');
-		if (!tmpDate || *tmpDate == '\n')
-			break ;
-		csv.getline(tmpPrice, 256);
-		_dataBase.insert(std::pair<std::string, float>(tmpDate, atof(tmpPrice)));
+		getline(csv, line);
+		pos = line.find(',');
+		if (pos == std::string::npos)	// check in case of there aren't data in line
+			continue;
+		_dataBase.insert(std::pair<std::string, float>(line.substr(0, pos), atof(line.substr(pos + 1).c_str())));
 	}
+	date_price_t::iterator	it = _dataBase.begin();
+	_lowestDate = it->first;	// store the lowest date
 	csv.close();
 }
 
+// lower_bound will take the next key if doesn't found key value.
+// So I have to take one step back to get lower date
 float	BTC::_getPrice(const std::string& date) const
 {
 	date_price_t::const_iterator	it;
@@ -111,22 +134,27 @@ static bool	validFormat(std::string const& line, date_num_t& input)
 	return true;
 }
 
-static bool	isdate_str(std::string const& date)
+static bool	isdate_str(std::string date)
 {
 	size_t	i = 0;
-	size_t	dash = 0;
 
-	while (date[i]) {
-		while (isdigit(date[i])) 
-			i++;
-		if (date[i] !=  '-')
-			break;
+	while (isdigit(date[i]))
 		i++;
-		dash++;
-	}
-	if (dash == 2 && date[i] == '\0')
-		return true;
-	return false;
+	if (i != 4 || date[i] != '-')
+		return false;
+	date.erase(0, 5);
+	i = 0;
+	while (isdigit(date[i]))
+		i++;
+	if (i != 2 || date[i] != '-')
+		return false;
+	date.erase(0, 3);
+	i = 0;
+	while (isdigit(date[i]))
+		i++;
+	if (i != 2 || date[i] != '\0')
+		return false;
+	return true;
 }
 
 static bool	validNumber(std::string number)
@@ -142,19 +170,20 @@ static bool	validNumber(std::string number)
 	return false;
 }
 
-static bool	validDate(std::string date)
+static bool	validDate(std::string date, std::string const lowestDate)
 {
-	int	year, month, day;
 	size_t	pos;
+	int		year, month, day;
 
-	// pos = date.find('-');
-	year = atoi(date.substr(0, 4).c_str());
-	// date.erase(0, pos + 1);
-	// pos = date.find('-');
-	month = atoi(date.substr(5, pos).c_str());
+	if (date < lowestDate)
+		return prtErrMsg("Error: there aren't data before " + lowestDate), false;
+	pos = date.find('-');
+	year = atoi(date.substr(0, pos).c_str());
+	date.erase(0, pos + 1);
+	pos = date.find('-');
+	month = atoi(date.substr(0, pos).c_str());
 	date.erase(0, pos + 1);
 	day = atoi(date.substr(0, date.length()).c_str());
-
 	if (year >= 1900 && month >= 1 && month <= 12 && day >= 1 && day <= 31)
 	{
 		if ((month == Apr || month == Jun || month == Sep || month == Nov)) {
@@ -164,8 +193,12 @@ static bool	validDate(std::string date)
 		else if (month == Feb) {
 			if (day <= 28)
 				return true;
-			else if (day == 29 && year % 4 == 0 && (year % 100 != 0 || (year % 100 == 0 && year % 400 == 0)))
-				return true;
+			else if (day == 29) {
+				if (year % 4 == 0 && year % 100 != 0)
+					return true;
+				else if (year % 4 == 0 && year % 100 == 0 && year % 400 == 0)
+					return true;
+			}
 		}
 		else
 			return true;
@@ -204,6 +237,7 @@ bool	ft_isdigit_str(const std::string& str)
 		if (str[i++] == '.')
 			dot++;
 	}
+	// for protect the case of first/last char is '.'
 	if (str[i] == '\0' && dot <= 1 && str[i - 1] != '.' && str[0] != '.')
 		return true;
 	return false;

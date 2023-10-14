@@ -18,20 +18,20 @@ bool	readFile(std::string name, std::string &str)
 	char*			buffer;
 	int				length;
 
-	inFile.open(name.c_str());
+	inFile.open(name.c_str());		// Convert string to char* by c_str() function
 	if (!inFile.is_open())
 	{
 		std::cerr << name << " :Can not open." << std::endl;
 		return (false);
 	}
-	inFile.seekg(0, inFile.end);
-	length = inFile.tellg();
-	inFile.seekg(0, inFile.beg);
-	buffer = new char [length];
-	inFile.read(buffer, length);
-	str = buffer;
-	delete [] buffer;
-	inFile.close();
+	inFile.seekg(0, inFile.end);	// Set position to end of the stream
+	length = inFile.tellg();		// Get current position
+	inFile.seekg(0, inFile.beg);	// Set position back to begining of the stream
+	buffer = new char [length];		// Allocate Size of Buffer as size of inFile
+	inFile.read(buffer, length);	// Read all data in inFile to Buffer
+	str = buffer;					// Copy string from Buffer to str
+	delete [] buffer;				// Free Buffer
+	inFile.close();					// Close inFile
 	return (true);
 }
 
