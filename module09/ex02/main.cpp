@@ -6,32 +6,42 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 09:13:06 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/05 17:12:31 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/17 16:23:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bitcoinExchange.hpp"
+#include "PmergeMe.hpp"
+
+template<typename T>
+void	displayNum(T const & nums)
+{
+	for (typename T::const_iterator it = nums.begin(); it != nums.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+
+void	prtArr(unsigned int* arr, size_t n)
+{
+	for (size_t i = 0; i < n; i++)
+		std::cout << arr[i] << " ";
+	std::cout << std::endl;
+}
 
 int	main(int ac, char **av)
 {
-	// std::stack<int>	stk;
-	// std::string		str;
+	unsigned int	arr[] = {9, 4, 7, 3, 1, 5, 2, 8, 6};
+	std::size_t		arrSize = sizeof(arr) / sizeof(int);
 
-	// if (ac != 2)
-	// 	return prtErrMsg("The program take 1 argument."), 1;
-	// std::istringstream	iss(av[1]);
-	// do {
-	// 	iss >> str;
-	// 	if (isNumbers(str))
-	// 		stk.push(atoi(str.c_str()));
-	// 	else if (isOperator(str))
-	// 		if (!operating(str[0], stk))
-	// 			return 1;
-	// 	else
-	// 		return prtErrMsg("Error : Numbers or Operator was wrong."), 1;
-	// } while (!iss.eof());
-	// if (stk.size() != 1)
-	// 	return prtErrMsg("Error : Wrong expression."), 1;
-	// std::cout << stk.top() << std::endl;
+	prtArr(arr, arrSize);
+
+	std::vector<unsigned int>	vec(arr, arr + arrSize);
+	displayNum(vec);
+	// std::list<unsigned int>		list(arr, arr + arrSize);
+	// displayNum(list);
+
+	mergeInsertSort(vec);
+	displayNum(vec);
+
+
 	return 0;
 }

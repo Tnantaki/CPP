@@ -1,13 +1,13 @@
 ### Executablem###
-NAME	= btc
+NAME	= PmergeMe
 
 ### Compilation ###
 CC		= c++
 RM		= rm -f
-CFLAGS	= -Wall -Wextra -Werror -std=c++98
+CFLAGS	= #-Wall -Wextra -Werror -std=c++98
 
 ### Source Files ###
-SRCS	= main.cpp BitcoinExchange.cpp
+SRCS	= main.cpp PmergeMe.cpp
 
 ### Object Files ###
 OBJS	= $(SRCS:.cpp=.o)
