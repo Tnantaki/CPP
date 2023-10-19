@@ -6,42 +6,46 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 09:13:06 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/17 16:23:24 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/19 15:07:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-template<typename T>
-void	displayNum(T const & nums)
-{
-	for (typename T::const_iterator it = nums.begin(); it != nums.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-}
-
-void	prtArr(unsigned int* arr, size_t n)
-{
-	for (size_t i = 0; i < n; i++)
-		std::cout << arr[i] << " ";
-	std::cout << std::endl;
-}
-
 int	main(int ac, char **av)
 {
-	unsigned int	arr[] = {9, 4, 7, 3, 1, 5, 2, 8, 6};
-	std::size_t		arrSize = sizeof(arr) / sizeof(int);
+	if (ac < 2)
+		return prtErrMsg("No argument!!!"), 1;
 
-	prtArr(arr, arrSize);
+	struct timeval	start;
+	std::size_t		size = ac - 1;
+	unsigned int*	arr = new unsigned int [size];
 
-	std::vector<unsigned int>	vec(arr, arr + arrSize);
-	displayNum(vec);
-	// std::list<unsigned int>		list(arr, arr + arrSize);
-	// displayNum(list);
+	if (!setInput(arr, size, av))
+		return 1;
+	std::vector<unsigned int>	vecCon(arr, arr + size);
+	std::list<unsigned int>		listCon(arr, arr + size);
+	double	vecTime;
+	double	listTime;
 
-	mergeInsertSort(vec);
-	displayNum(vec);
+	std::cout << "Before: ";
+	displayNum(vecCon);
 
+	gettimeofday(&start, NULL);
+	mergeInsertSort(vecCon);
+	vecTime = getExecTime(start);
+
+	// gettimeofday(&start, NULL);
+	// mergeInsertSort(listCon);
+	// listTime = getExecTime(start);
+
+	std::cout << "After: ";
+	displayNum(vecCon);
+	checkAscending(vecCon);
+
+	std::cout << std::fixed << std::setprecision(5);
+	std::cout << "Time to process a range of " << size << " elements with std::vector : " << vecTime << " us" << std::endl;
+	// std::cout "Time to process a range of " << size << " elements with std::list : " << listTime << " us" << std::endl;
 
 	return 0;
 }
