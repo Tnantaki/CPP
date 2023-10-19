@@ -3,14 +3,13 @@
 
 #include <iostream>
 #include <vector>
-#include <list>
-#include <algorithm>	// std::swap
+#include <deque>
 #include <cstdlib>		// atol()
-#include <ctime>		// time
 #include <iomanip>		// std::setprecision
 #include <limits>		// MAX_INT
 #include <cstring>		// strlen()
 #include <sys/time.h>	// gettimeofday()
+#include <type_traits>	// std::is_same()
 
 # define BLACK	"\e[0;30m"
 # define RED	"\e[0;31m"
@@ -28,6 +27,7 @@ struct pair_t
 };
 
 void	mergeInsertSort(std::vector<unsigned int> & nums);
+void	mergeInsertSort(std::deque<unsigned int> & nums);
 void	prtErrMsg(const std::string msg);
 void	prtArr(unsigned int* arr, size_t n);
 bool	setInput(unsigned int* & arr, size_t size, char **av);
@@ -42,15 +42,15 @@ void	displayNum(T const & nums)
 }
 
 template<typename T>
-void	checkAscending(T const & nums)
+void	checkAscending(T const & nums, std::string str)
 {
 	for (typename T::const_iterator it = nums.begin(); it + 1 != nums.end(); it++)
 	{
 		if (*it > *(it + 1)) {
-			return prtErrMsg("No, number is not asceding order !!!");
+			return prtErrMsg(str + "No, number is not asceding order !!!");
 		}
 	}
-	std::cerr << GREEN << "OK,number is ascending Order." << RESET << std::endl;
+	std::cerr << GREEN << str + "OK,number is ascending Order." << RESET << std::endl;
 }
 
 #endif

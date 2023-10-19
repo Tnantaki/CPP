@@ -1,11 +1,9 @@
 #include "PmergeMe.hpp"
 
-template<typename T>
-std::vector<pair_t>	createOrderedPair(T & nums)
+static std::vector<pair_t>	createOrderedPair(std::vector<unsigned int> & nums)
 {
 	int	size = nums.size() / 2;
 	int	j;
-	if ()
 	std::vector<pair_t>	vec(size);
 
 	for (int i = 0, j = 0; i < size; i++, j += 2) {
@@ -17,12 +15,28 @@ std::vector<pair_t>	createOrderedPair(T & nums)
 	return vec;
 }
 
-static void	merge(std::vector<pair_t>& vec, int first, int end, int mid)
+static std::deque<pair_t>	createOrderedPair(std::deque<unsigned int> & nums)
+{
+	int	size = nums.size() / 2;
+	int	j;
+	std::deque<pair_t>	deque(size);
+
+	for (int i = 0, j = 0; i < size; i++, j += 2) {
+		if (nums[j] < nums[j + 1])
+			deque[i] = {nums[j], nums[j + 1]};
+		else
+			deque[i] = {nums[j + 1], nums[j]};
+	}
+	return deque;
+}
+
+template<typename T>
+static void	merge(T & vec, int first, int end, int mid)
 {
 	int	n1 = mid - first + 1;
 	int	n2 = end - mid;
-	std::vector<pair_t>	arrLeft(n1);
-	std::vector<pair_t>	arrRight(n2);
+	T	arrLeft(n1);
+	T	arrRight(n2);
 
 	for (int i = 0; i < n1; i++)
 		arrLeft[i] = vec[first + i];
@@ -46,7 +60,8 @@ static void	merge(std::vector<pair_t>& vec, int first, int end, int mid)
 
 // first : first index of array
 // end   : last index of array
-void	mergeSort(std::vector<pair_t>& vec, int first, int end)
+template<typename T>
+static void	mergeSort(T & vec, int first, int end)
 {
 	if (first < end)
 	{
@@ -157,38 +172,29 @@ void	mergeInsertSort(std::vector<unsigned int> & nums)
 	nums = S;
 }
 
-// void	mergeInsertSort(std::list<unsigned int> & nums)
-// {
-// 	bool			staggler;
-// 	unsigned int	lastEle;
+void	mergeInsertSort(std::deque<unsigned int> & nums)
+{
+	bool			staggler;
+	unsigned int	lastEle;
 
-// 	// 1. Catching staggler if number of element is old.
-// 	staggler = nums.size() % 2;
-// 	if (staggler) {
-// 		lastEle = nums.back();
-// 		nums.pop_back();
-// 	}
-
-// 	// 2. Create Ordered Pairs
-// 	std::list<pair_t>	pairs = createOrderedPair(nums);
-
-// 	// 3. Recursively sort pairs by Large value of element;
-// 	mergeSort(pairs, 0, pairs.size() - 1);
-
-// 	// 4. create S(main chain) and pend. 
-// 	std::vector<unsigned int>	S(pairs.size());
-// 	std::vector<unsigned int>	pend(pairs.size());
-// 	for (int i = 0; i < pairs.size(); i++) {
-// 		S[i] = pairs[i].second;
-// 		pend[i] = pairs[i].first;
-// 	}
-// 	if (staggler)
-// 		pend.push_back(lastEle);
-	
-// 	// 5. insertion sort
-// 	insertionSort(S, pend);
-// 	nums = S;
-// }
+	staggler = nums.size() % 2;
+	if (staggler) {
+		lastEle = nums.back();
+		nums.pop_back();
+	}
+	std::deque<pair_t>	pairs = createOrderedPair(nums);
+	mergeSort(pairs, 0, pairs.size() - 1);
+	std::deque<unsigned int>	S(pairs.size());
+	std::deque<unsigned int>	pend(pairs.size());
+	for (int i = 0; i < pairs.size(); i++) {
+		S[i] = pairs[i].second;
+		pend[i] = pairs[i].first;
+	}
+	if (staggler)
+		pend.push_back(lastEle);
+	insertionSort(S, pend);
+	nums = S;
+}
 
 // ********************************************************** //
 // --------------------- Utils Functions -------------------- //
