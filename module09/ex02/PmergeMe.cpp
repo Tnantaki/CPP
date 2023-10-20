@@ -1,6 +1,13 @@
 #include "PmergeMe.hpp"
 
-static int	jacobsthal(int n);
+static unsigned int	jacobsthal_cal(int n);
+
+const unsigned int jacobsthal[] = { 0u, 1u, 1u, 3u, 5u, 11u, 21u,
+	43u, 85u, 171u, 341u, 683u, 1365u, 2731u, 5461u, 10923u, 21845u,
+	43691u, 87381u, 174763u, 349525u, 699051u, 1398101u, 2796203u,
+	5592405u, 11184811u, 22369621u, 44739243u, 89478485u, 178956971u,
+	357913941u, 715827883u, 1431655765u, 2863311531u,
+};
 
 // ********************************************************** //
 // -------------------- Vector Container -------------------- //
@@ -15,7 +22,7 @@ void	mergeInsertSort(std::vector<unsigned int> & nums)
 	bool			staggler;
 	unsigned int	lastEle;
 
-	// 1. Catching staggler if number of element is old.
+	// 1. Catching staggler if number of element is odd.
 	staggler = nums.size() % 2;
 	if (staggler) {
 		lastEle = nums.back();
@@ -46,10 +53,10 @@ void	mergeInsertSort(std::vector<unsigned int> & nums)
 static std::vector<pair_t>	createOrderedPair(std::vector<unsigned int> & nums)
 {
 	int	size = nums.size() / 2;
-	int	j;
 	std::vector<pair_t>	vec(size);
+	int	j = 0;
 
-	for (int i = 0, j = 0; i < size; i++, j += 2) {
+	for (int i = 0; i < size; i++, j += 2) {
 		if (nums[j] < nums[j + 1])
 			vec[i] = {nums[j], nums[j + 1]};
 		else
@@ -60,33 +67,20 @@ static std::vector<pair_t>	createOrderedPair(std::vector<unsigned int> & nums)
 
 static void	merge(std::vector<pair_t> & vec, int first, int end, int mid)
 {
-	int	n1 = mid - first + 1;
-	int	n2 = end - mid;
-	std::vector<pair_t>	left(n1);
-	std::vector<pair_t>	right(n2);
+	std::vector<pair_t>	left(vec.begin() + first, vec.begin() + mid + 1);
+	std::vector<pair_t>	right(vec.begin() + mid + 1, vec.begin() + end + 1);
 
-	for (int i = 0; i < n1; i++)
-		left[i] = vec[first + i];
-	for (int i = 0; i < n2; i++)
-		right[i] = vec[mid + 1 + i];
-
-	int i = 0, j = 0, k = first;
-
-	while (i < n1 && j < n2)
-	{
-		if (left[i].second < right[j].second)
-			vec[k++] = left[i++];
+	std::vector<pair_t>::iterator	it1 = left.begin();
+	std::vector<pair_t>::iterator	it2 = right.begin();
+	for (int i = first; i < end + 1; i++) {
+		if (it2 == right.end() || (it1 != left.end() && it1->second < it2->second))
+			vec[i] = *it1++;
 		else
-			vec[k++] = right[j++];
+			vec[i] = *it2++;
 	}
-	while (i < n1)
-		vec[k++] = left[i++];
-	while (j < n2)
-		vec[k++] = right[j++];
 }
 
-// first : first index of array
-// end   : last index of array
+// first : first index of array, end : last index of array
 static void	mergeSort(std::vector<pair_t> & vec, int first, int end)
 {
 	if (first < end)
@@ -99,36 +93,9 @@ static void	mergeSort(std::vector<pair_t> & vec, int first, int end)
 	}
 }
 
-// R is Last index area;
-// L is first index;
-static int	binarySearch(std::vector<unsigned int> & S, unsigned int & number, int L, int R)
-{
-	int	midPoint;
-		
-	midPoint = L + (R - L) / 2;
-	while (L <= R)
-	{
-		if (number < S[midPoint])
-		{
-			R = midPoint - 1;
-			midPoint = L + (R - L) / 2;
-		}
-		else
-		{
-			L = midPoint + 1;
-			midPoint = L + (R - L) / 2;
-		}
-	}
-	if (number < S[midPoint])
-		return midPoint;
-	else
-		return midPoint + 1;
-}
-
 static void	insertionSort(std::vector<unsigned int> & S, std::vector<unsigned int> & pend)
 {
 	int	lastPendIndex = pend.size() - 1;
-	int	insertIndex;
 	int	insertPoint;
 	int	insertArea;
 	int	oldPoint;
@@ -139,17 +106,16 @@ static void	insertionSort(std::vector<unsigned int> & S, std::vector<unsigned in
 	S.insert(S.begin(), pend[insertPoint]);
 	while (oldPoint < lastPendIndex)
 	{
-		insertPoint = jacobsthal(n) - 1;
+		insertPoint = jacobsthal[n] - 1;
 		if (insertPoint >= lastPendIndex)
 			insertPoint = lastPendIndex;
-		insertArea = oldPoint + insertPoint;
+		insertArea = oldPoint + insertPoint + 1;
 		while (insertPoint > oldPoint)
 		{
-			insertIndex = binarySearch(S, pend[insertPoint], 0, insertArea);
-			S.insert(S.begin() + insertIndex, pend[insertPoint]);
+			S.insert(std::lower_bound(S.begin(), S.begin() + insertArea, pend[insertPoint]), pend[insertPoint]);
 			insertPoint--;
 		}
-		oldPoint = jacobsthal(n++) - 1;
+		oldPoint = jacobsthal[n++] - 1;
 	}
 }
 
@@ -277,7 +243,7 @@ static void	insertionSort(std::deque<unsigned int> & S, std::deque<unsigned int>
 	S.insert(S.begin(), pend[insertPoint]);
 	while (oldPoint < lastPendIndex)
 	{
-		insertPoint = jacobsthal(n) - 1;
+		insertPoint = jacobsthal_cal(n) - 1;
 		if (insertPoint >= lastPendIndex)
 			insertPoint = lastPendIndex;
 		insertArea = oldPoint + insertPoint;
@@ -287,7 +253,7 @@ static void	insertionSort(std::deque<unsigned int> & S, std::deque<unsigned int>
 			S.insert(S.begin() + insertIndex, pend[insertPoint]);
 			insertPoint--;
 		}
-		oldPoint = jacobsthal(n++) - 1;
+		oldPoint = jacobsthal_cal(n++) - 1;
 	}
 }
 
@@ -296,14 +262,14 @@ static void	insertionSort(std::deque<unsigned int> & S, std::deque<unsigned int>
 // --------------------- Utils Functions -------------------- //
 // ********************************************************** //
 
-static int	jacobsthal(int n)
+static unsigned int	jacobsthal_cal(int n)
 {
 	if (n == 0)
 		return 0;
 	else if (n == 1)
 		return 1;
 	else
-		return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
+		return jacobsthal_cal(n - 1) + 2 * jacobsthal_cal(n - 2);
 }
 
 static bool	isdigitStr(char *str)
@@ -394,7 +360,7 @@ void	checkAscending(std::deque<unsigned int> const & nums, std::string str)
 	for (std::deque<unsigned int>::const_iterator it = nums.begin(); it + 1 != nums.end(); it++)
 	{
 		if (*it > *(it + 1)) {
-			return prtErrMsg(str + "No, number is not asceding order !!!");
+			return prtErrMsg(str + "No, number is not asceding order !!! : ");
 		}
 	}
 	std::cerr << GREEN << str + "OK,number is ascending Order." << RESET << std::endl;
