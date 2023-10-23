@@ -16,15 +16,15 @@
 # define RESET	"\e[0m"
 
 class NotFound : public std::exception {
-	const char*	what() const throw() {return "No occurence is found";}
+	const char*	what() const throw() {return "Value is not found";}
 };
 
 template<typename T>
-size_t	easyfind(T& ctn, int value)
+typename T::iterator	easyfind(T& ctn, int value)
 {
 	typename T::iterator	it = std::find(ctn.begin(), ctn.end(), value);
 	if (it != ctn.end())
-		return std::distance(ctn.begin(), it);
+		return it;
 	throw NotFound();
 }
 

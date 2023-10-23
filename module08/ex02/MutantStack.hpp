@@ -14,6 +14,8 @@
 # define WHITE	"\e[0;37m"
 # define RESET	"\e[0m"
 
+// if there aren't specify underlying container, `deque` is used.
+// and member funtion type is `stack::container_type`
 // 'c' is a member data of container.
 template<typename T>
 class MutantStack : public std::stack<T>

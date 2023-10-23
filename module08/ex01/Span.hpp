@@ -28,7 +28,9 @@ class Span
 		unsigned int		_maxSize; // capacity of this Span
 		unsigned int		_index;
 		std::vector<int>	_arr;
+
 		Span();
+		void	checkError() const;
 	public:
 		Span(unsigned int const N);
 		Span(Span const& other);
