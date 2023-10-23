@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tnantaki <tnantaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 09:13:06 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/13 07:58:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/23 10:33:44 by tnantaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	main(int ac, char **av)
 	std::istringstream	iss(av[1]);
 	do {
 		iss >> str;
-		if (isNumbers(str))
+		if (str.empty())
+			break;
+		else if (isNumbers(str))
 			stk.push(atoi(str.c_str()));
 		else if (isOperator(str))
 		{
@@ -31,6 +33,7 @@ int	main(int ac, char **av)
 		}
 		else
 			return prtErrMsg("Error : Numbers or Operator was wrong."), 1;
+		str.clear();
 	} while (!iss.eof());
 	if (stk.size() != 1)
 		return prtErrMsg("Error : Wrong expression."), 1;

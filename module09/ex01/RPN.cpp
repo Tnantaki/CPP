@@ -40,7 +40,6 @@ bool	operating(char opr, std::stack<int> &stk)
 		return prtErrMsg("Error : Wrong expression."), false;
 	a = stk.top();
 	stk.pop();
-	std::cout << a << opr << b << "=";
 	if (opr == '+')
 		nums = a + b;
 	else if (opr == '-')
@@ -54,6 +53,6 @@ bool	operating(char opr, std::stack<int> &stk)
 		nums = a / b;
 	}
 	stk.push(nums);
-	std::cout << stk.top() << std::endl;
+	// std::cout << a << opr << b << "=" << stk.top() << std::endl; //debug
 	return true;
 }

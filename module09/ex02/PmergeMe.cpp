@@ -58,9 +58,9 @@ static std::vector<pair_t>	createOrderedPair(std::vector<unsigned int> & nums)
 
 	for (int i = 0; i < size; i++, j += 2) {
 		if (nums[j] < nums[j + 1])
-			vec[i] = {nums[j], nums[j + 1]};
+			vec[i] = (pair_t){nums[j], nums[j + 1]};
 		else
-			vec[i] = {nums[j + 1], nums[j]};
+			vec[i] = (pair_t){nums[j + 1], nums[j]};
 	}
 	return vec;
 }
@@ -159,9 +159,9 @@ static std::deque<pair_t>	createOrderedPair(std::deque<unsigned int> & nums)
 
 	for (int i = 0, j = 0; i < size; i++, j += 2) {
 		if (nums[j] < nums[j + 1])
-			vec[i] = {nums[j], nums[j + 1]};
+			vec[i] = (pair_t){nums[j], nums[j + 1]};
 		else
-			vec[i] = {nums[j + 1], nums[j]};
+			vec[i] = (pair_t){nums[j + 1], nums[j]};
 	}
 	return vec;
 }
