@@ -78,17 +78,16 @@ void	Span::addNumber(int num)
 unsigned int	Span::shortestSpan()
 {
 	checkError();
+	std::vector<int>	tmp(_arr);
+	std::sort(tmp.begin(), tmp.end());
 	unsigned int	shortNum = MAX_UINT;
 	unsigned int	num;
-	for (unsigned int j = 0; j + 1 < _arr.size(); j++)
+	for (unsigned int i = 0; i + 1 < tmp.size(); i++)
 	{
-		for (unsigned int i = j + 1; i < _arr.size(); i++)
-		{
-			num = static_cast<unsigned int>(abs(static_cast<long>(_arr[j])
-				- static_cast<long>(_arr[i])));
-			if (num > 0 && num < shortNum)
-				shortNum = num;
-		}
+		num = static_cast<unsigned int>(abs(static_cast<long>(tmp[i + 1])
+			- static_cast<long>(tmp[i])));
+		if (num > 0 && num < shortNum)
+			shortNum = num;
 	}
 	return (shortNum);
 }

@@ -6,7 +6,7 @@
 /*   By: tnantaki <tnantaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 09:13:06 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/23 09:42:22 by tnantaki         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:22:54 by tnantaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	testSpan()
 		std::cout << "longest span: " << sp.longestSpan() << std::endl;
 	}
 	{
-		Span sp = Span(10000);
+		Span sp = Span(100000);
 		sp.randomAllNumbers();
 		std::cout << "### Test 10000 numbers ###" << std::endl;
 		std::cout << "size: " << sp.size() << std::endl;

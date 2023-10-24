@@ -6,26 +6,28 @@
 /*   By: tnantaki <tnantaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 09:13:06 by marvin            #+#    #+#             */
-/*   Updated: 2023/10/22 19:53:09 by tnantaki         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:27:41 by tnantaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "easyfind.hpp"
 #include <vector>
-#include <array>
+#include <deque>
 #include <list>
 
 void	arrCtn()
 {
 	std::cout << "### Array Container ###" << std::endl;
-	std::array<int, 10>	arr = {99, 39, 10, 15, 25, 30, 49, 3, 77, 1};
-	std::array<int, 10>::iterator	it;
+	int	const	arr[] = {99, 39, 10, 15, 25, 30, 49, 3, 77, 1};
+	size_t		arrSize = sizeof(arr) / sizeof(int);
+	std::deque<int>	deque(arr, arr + arrSize);
+	std::deque<int>::iterator	it;
 
 	try {
-		it = easyfind(arr, 77);
+		it = easyfind(deque, 77);
 		std::cout << "Found "<< *it << " in container." << std::endl;
 
-		it = easyfind(arr, 55);
+		it = easyfind(deque, 55);
 		std::cout << "Found "<< *it << " in container." << std::endl;
 	}
 	catch (std::exception &e) {
