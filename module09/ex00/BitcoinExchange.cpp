@@ -1,4 +1,4 @@
-#include "bitcoinExchange.hpp"
+#include "BitcoinExchange.hpp"
 
 // ********************************************************** //
 // ----------------- Orthodox Canonical Form ---------------- //
@@ -203,7 +203,7 @@ static bool	validDate(std::string date, std::string const lowestDate)
 		else
 			return true;
 	}
-	return prtErrMsg("Error: wrong date."), false;
+	return prtErrMsg("Error: the specified date is invalid."), false;
 }
 
 // ********************************************************** //
