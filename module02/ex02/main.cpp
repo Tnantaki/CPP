@@ -93,5 +93,8 @@ int	main(void)
 	// min_max_Test();
 
 	subject_Test();
+	Fixed	a(2.46f);
+	Fixed	b(1.20f);
+	std::cout << a / b << std::endl;
 	return 0;
 }

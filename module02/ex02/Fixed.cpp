@@ -113,23 +113,41 @@ bool	Fixed::operator!=(Fixed const& rhs) const
 
 Fixed	Fixed::operator+(Fixed const& rhs) const
 {
-	return Fixed(this->toFloat() + rhs.toFloat());
+	Fixed	result;
+
+	result.setRawBits(this->_fpNum + rhs._fpNum);
+	return result;
 }
 
 Fixed	Fixed::operator-(Fixed const& rhs) const
 {
-	return Fixed(this->toFloat() - rhs.toFloat());
+	Fixed	result;
+
+	result.setRawBits(this->_fpNum - rhs._fpNum);
+	return result;
 }
 
 Fixed	Fixed::operator*(Fixed const& rhs) const
 {
-	return Fixed(this->toFloat() * rhs.toFloat());
+	Fixed	result;
+
+	long int	tmp = this->_fpNum * rhs._fpNum;
+	result.setRawBits(tmp >> _ftBits);
+	return result;
 }
 
 Fixed	Fixed::operator/(Fixed const& rhs) const
 {
 	return Fixed(this->toFloat() / rhs.toFloat());
 }
+
+// Fixed	Fixed::operator/(Fixed const& rhs) const
+// {
+// 	Fixed	result;
+
+// 	result.setRawBits((((long int)1 << _ftBits) << _ftBits) / rhs._fpNum);
+// 	return result * this*;
+// }
 
 // ********************************************************** //
 // ------------------- Increment/Decrement ------------------ //
