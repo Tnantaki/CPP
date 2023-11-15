@@ -50,8 +50,7 @@ void	BTC::evaluate(char* fileName) const
 	if (!inputFile.is_open())
 		throw CouldNotOpenFile();
 	getline(inputFile, line); // Call Head line
-	while (!inputFile.eof()) {
-		getline(inputFile, line);
+	while(getline(inputFile, line)) {
 		if (!validFormat(line, input))
 			continue ;
 		if (!validDate(input.date, _lowestDate))
