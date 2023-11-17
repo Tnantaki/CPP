@@ -1,19 +1,17 @@
 #ifndef FWOOSH_HPP
 # define FWOOSH_HPP
 
-#include <string>
-#include <iostream>
 #include "ASpell.hpp"
 
 class Fwoosh : public ASpell
 {
 	public:
-		Fwoosh(void);
-		Fwoosh(Fwoosh const & rhs);
-		Fwoosh &	operator=(Fwoosh const & rhs);
-		~Fwoosh(void);
+		Fwoosh();
+		Fwoosh(Fwoosh const& rhs);
+		Fwoosh&	operator=(Fwoosh const& rhs);
+		~Fwoosh();
 
-		ASpell*	clone(void) const;
+		ASpell*	clone() const;
 };
 
 #endif

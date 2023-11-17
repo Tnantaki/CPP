@@ -1,5 +1,5 @@
-#ifndef SpellBook_HPP
-# define SpellBook_HPP
+#ifndef SPELLBOOK_HPP
+# define SPELLBOOK_HPP
 
 #include <string>
 #include <iostream>
@@ -9,16 +9,17 @@
 class SpellBook
 {
 	private:
-		std::map<std::string, ASpell*>	_spells;
-		SpellBook(SpellBook const & rhs);
-		SpellBook &	operator=(SpellBook const & rhs);
+		std::map<std::string, ASpell*>	_books;
+
+		SpellBook(SpellBook const& rhs);
+		SpellBook&	operator=(SpellBook const& rhs);
 	public:
-		SpellBook(void);
-		~SpellBook(void);
+		SpellBook();
+		~SpellBook();
 
 		void	learnSpell(ASpell* spell);
-		void	forgetSpell(std::string const & spellName);
-		ASpell*	createSpell(std::string const & spellName);
+		void	forgetSpell(std::string spellName);
+		ASpell*	createSpell(std::string spellName);
 };
 
 #endif

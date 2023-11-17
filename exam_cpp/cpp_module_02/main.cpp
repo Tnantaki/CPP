@@ -1,10 +1,4 @@
 #include "Warlock.hpp"
-#include "Fwoosh.hpp"
-#include "Fireball.hpp"
-#include "Polymorph.hpp"
-#include "Dummy.hpp"
-#include "BrickWall.hpp"
-#include "TargetGenerator.hpp"
 
 int main()
 {

@@ -15,20 +15,20 @@ class Warlock
 		std::map<std::string, ASpell*>	_spells;
 
 		Warlock();
-		Warlock(Warlock const & rhs);
-		Warlock&	operator=(Warlock const & rhs);
+		Warlock(Warlock const& rhs);
+		Warlock&	operator=(Warlock const& rhs);
 	public:
 		Warlock(std::string const & name, std::string const & title);
 		~Warlock();
 
-		std::string const &	getName() const;
-		std::string const &	getTitle() const;
-		void	setTitle(std::string const & title);
+		std::string const	getName() const;
+		std::string const	getTitle() const;
+		void	setTitle(const std::string & title);
 		void	introduce() const;
 
 		void	learnSpell(ASpell* spell);
 		void	forgetSpell(std::string spellName);
-		void	launchSpell(std::string spellName, ATarget& target);
+		void	launchSpell(std::string spellName, ATarget & target);
 };
 
 #endif

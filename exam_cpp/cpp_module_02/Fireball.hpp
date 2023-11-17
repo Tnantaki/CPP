@@ -1,19 +1,17 @@
 #ifndef FIREBALL_HPP
 # define FIREBALL_HPP
 
-#include <string>
-#include <iostream>
 #include "ASpell.hpp"
 
 class Fireball : public ASpell
 {
 	public:
-		Fireball(void);
-		Fireball(Fireball const & rhs);
-		Fireball &	operator=(Fireball const & rhs);
-		~Fireball(void);
+		Fireball();
+		Fireball(Fireball const& rhs);
+		Fireball&	operator=(Fireball const& rhs);
+		~Fireball();
 
-		ASpell*	clone(void) const;
+		ASpell*	clone() const;
 };
 
 #endif

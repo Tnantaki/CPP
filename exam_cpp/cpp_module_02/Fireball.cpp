@@ -1,19 +1,17 @@
 #include "Fireball.hpp"
 
-Fireball::Fireball(void) : ASpell("Fireball", "burnt to a crisp") {}
+Fireball::Fireball() : ASpell("Fireball", "burnt to a crisp") {}
 
 Fireball::Fireball(Fireball const & rhs) : ASpell(rhs) {}
 
-Fireball&	Fireball::operator=(Fireball const & rhs)
-{
+Fireball&	Fireball::operator=(Fireball const & rhs) {
 	if (this != &rhs)
 		ASpell::operator=(rhs);
-	return *this;
+	return (*this);
 }
 
-Fireball::~Fireball(void) {}
+Fireball::~Fireball() {}
 
-ASpell*	Fireball::clone() const
-{
+ASpell*	Fireball::clone() const {
 	return new Fireball;
 }

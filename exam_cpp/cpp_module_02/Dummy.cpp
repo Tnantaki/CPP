@@ -4,16 +4,14 @@ Dummy::Dummy() : ATarget("Target Practice Dummy") {}
 
 Dummy::Dummy(Dummy const & rhs) : ATarget(rhs) {}
 
-Dummy&	Dummy::operator=(Dummy const & rhs)
-{
+Dummy&	Dummy::operator=(Dummy const & rhs) {
 	if (this != &rhs)
 		ATarget::operator=(rhs);
-	return *this;
+	return (*this);
 }
 
-Dummy::~Dummy(void) {}
+Dummy::~Dummy() {}
 
-ATarget*	Dummy::clone(void) const
-{
+ATarget*	Dummy::clone() const {
 	return new Dummy;
 }

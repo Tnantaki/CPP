@@ -1,5 +1,5 @@
-#ifndef ATARGET_HPP
-# define ATARGET_HPP
+#ifndef ATarget_HPP
+# define ATarget_HPP
 
 #include <string>
 #include <iostream>
@@ -10,18 +10,18 @@ class ASpell;
 class ATarget
 {
 	private:
-		ATarget(void);
+		ATarget();
 	protected:
 		std::string	_type;
 	public:
 		ATarget(std::string const & type);
 		ATarget(ATarget const & rhs);
-		ATarget &	operator=(ATarget const & rhs);
-		virtual ~ATarget(void);
+		ATarget&	operator=(ATarget const & rhs);
+		virtual ~ATarget();
 
-		std::string const &	getType(void) const;
+		std::string const&	getType() const;
 		void	getHitBySpell(ASpell const & spell) const;
-		virtual ATarget*	clone(void) const = 0;
+		virtual ATarget*	clone() const = 0;
 };
 
 #endif

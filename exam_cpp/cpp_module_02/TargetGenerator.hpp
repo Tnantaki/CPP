@@ -11,15 +11,15 @@ class TargetGenerator
 	private:
 		std::map<std::string, ATarget*>	_targets;
 
-		TargetGenerator(TargetGenerator const & rhs);
-		TargetGenerator &	operator=(TargetGenerator const & rhs);
+		TargetGenerator(TargetGenerator const& rhs);
+		TargetGenerator&	operator=(TargetGenerator const& rhs);
 	public:
-		TargetGenerator(void);
-		~TargetGenerator(void);
+		TargetGenerator();
+		~TargetGenerator();
 
 		void	learnTargetType(ATarget* target);
-		void	forgetTargetType(std::string const & type);
-		ATarget*	createTarget(std::string const & type);
+		void	forgetTargetType(std::string targetName);
+		ATarget*	createTarget(std::string targetName);
 };
 
 #endif

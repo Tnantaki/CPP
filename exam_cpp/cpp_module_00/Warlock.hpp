@@ -11,15 +11,14 @@ class Warlock
 		std::string	_title;
 
 		Warlock();
-		Warlock(Warlock const & rhs);
-		Warlock &	operator=(Warlock const & rhs);
+		Warlock(Warlock const& rhs);
+		Warlock&	operator=(Warlock const& rhs);
 	public:
 		Warlock(std::string const & name, std::string const & title);
 		~Warlock();
-
-		std::string const &	getName() const;
-		std::string const &	getTitle() const;
-		void	setTitle(std::string const & title);
+		std::string const	getName() const;
+		std::string const	getTitle() const;
+		void	setTitle(const std::string & title);
 		void	introduce() const;
 };
 

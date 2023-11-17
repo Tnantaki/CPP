@@ -1,5 +1,5 @@
-#ifndef ASPELL_HPP
-# define ASPELL_HPP
+#ifndef ASpell_HPP
+# define ASpell_HPP
 
 #include <string>
 #include <iostream>
@@ -10,20 +10,20 @@ class ATarget;
 class ASpell
 {
 	private:
-		ASpell(void);
+		ASpell();
 	protected:
 		std::string	_name;
 		std::string	_effects;
 	public:
-		ASpell(std::string const & name, std::string const & effects);
-		ASpell(ASpell const & rhs);
-		ASpell &	operator=(ASpell const & rhs);
-		virtual ~ASpell(void);
+		ASpell(std::string const & name, std::string const & effect);
+		ASpell(ASpell const& rhs);
+		ASpell&	operator=(ASpell const& rhs);
+		virtual ~ASpell();
 
-		std::string	getName(void) const;
-		std::string	getEffects(void) const;
-		void	launch(ATarget const & target);
-		virtual ASpell*	clone(void) const = 0;
+		std::string const&	getName() const;
+		std::string const&	getEffects() const;
+		void	launch(ATarget const & target) const;
+		virtual ASpell*	clone() const = 0;
 };
 
 #endif
